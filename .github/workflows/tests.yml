@@ -22,7 +22,7 @@ jobs:
 
       - name: Wait for MongoDB
         run: |
-          until docker exec $(docker ps -q --filter "name=mongo") mongo --eval "db.stats()" &> /dev/null; do
+          until docker exec $(docker ps -q --filter "name=blogsMongoTestDB") mongo --eval "db.stats()" &> /dev/null; do
             sleep 5
           done
 
