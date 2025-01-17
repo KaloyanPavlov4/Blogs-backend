@@ -15,10 +15,19 @@ jobs:
 
       - name: Start MongoDB container
         run: |
-          docker compose -f docker-compose-test.yml up -d --wait
+          docker compose -f docker-compose-test.yml up -d
         env:
           COMPOSE_DOCKER_CLI_BUILD: 1
           DOCKER_BUILDKIT: 1
+        
+      - name: Wait for MongoDB to be ready
+        run: |
+          echo "Waiting for MongoDB to start..."
+          until docker exec blogsMongoTestDB mongo --eval "db.stats()" &>/dev/null; do
+            echo "Waiting for MongoDB to be ready..."
+            sleep 2
+          done
+          echo "MongoDB is ready!"
 
       - name: Install dependencies
         run: npm install
