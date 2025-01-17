@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+db = db.getSiblingDB('admin')
 
 db.createUser({
   user: 'appUser',
