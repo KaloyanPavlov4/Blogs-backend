@@ -1,0 +1,13 @@
+services:
+   mongo:
+    image: mongo:6.0.20
+    container_name: blogsMongoTestDB
+    restart: always
+    ports:
+     - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: testBlogs
+    volumes: 
+      - ./mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
